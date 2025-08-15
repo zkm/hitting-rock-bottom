@@ -10,16 +10,50 @@ class Cave
   end
 
   def add_water
-    grid.reverse.each_with_index do |row, row_index|
-      row.reverse.each_with_index do |value, column_index|
-        i = (grid.size - 1) - row_index
-        j = (row.size - 1) - column_index
-        if value == ' '
-          if underneath_water?(i, j) || next_to_water?(i, j)
-            grid[i][j] = '~'
-            return
-          end
+    # BFS approach: find all edge water cells, expand from there
+    height = grid.size
+    width = grid[0].size
+    queue = []
+    visited = Array.new(height) { Array.new(width, false) }
+    # Find all current water cells
+    height.times do |i|
+      width.times do |j|
+        if grid[i][j] == '~'
+          queue << [i, j]
+          visited[i][j] = true
         end
+      end
+    end
+    # If no water yet, start at inlet (top left open cell)
+    if queue.empty?
+      inlet_j = grid[0].find_index(' ')
+      queue << [0, inlet_j]
+      grid[0][inlet_j] = '~'
+      visited[0][inlet_j] = true
+      return
+    end
+    # Try to expand water from each edge cell
+    while !queue.empty?
+      i, j = queue.shift
+      # Flow down
+      if i + 1 < height && grid[i + 1][j] == ' '
+        grid[i + 1][j] = '~'
+        return
+      end
+      # Spread right
+      if j + 1 < width && grid[i][j + 1] == ' '
+        grid[i][j + 1] = '~'
+        return
+      end
+      # Spread left
+      if j - 1 >= 0 && grid[i][j - 1] == ' '
+        grid[i][j - 1] = '~'
+        return
+      end
+      # Spread up (rare, for trapped air)
+      if i - 1 >= 0 && grid[i - 1][j] == ' '
+        grid[i - 1][j] = '~'
+        return
       end
     end
   end
@@ -58,4 +92,4 @@ cave = Cave.build(lines[2..lines.size-1])
 end
 
 #puts cave.to_s
-#puts cave.to_depth_string
+puts cave.to_depth_string
