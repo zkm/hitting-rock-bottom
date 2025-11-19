@@ -1,12 +1,49 @@
-# [Ruby Hack Night](http://www.meetup.com/ChicagoRuby/events/67621712)
+# Hitting Rock Bottom
 
-## [[#11] Hitting Rock Bottom](http://puzzlenode.com/puzzles/11-hitting-rock-bottom)
+A water flow simulation puzzle solving hydrography challenges in underground caves.
 
-_This puzzle was contributed by Gregory Brown &amp; Andrea Singh and published on July 14, 2011_
+_Original puzzle contributed by Gregory Brown & Andrea Singh and published on July 14, 2011 as part of [PuzzleNode #11](http://puzzlenode.com/puzzles/11-hitting-rock-bottom)_
+
+## Overview
 
 The science of hydrography is about charting bodies of water by measuring their depths, tides and currents and describing the topography of river, lake or sea beds. 
 
 In this challenge you will work on a simulation problem with a hydrographic theme. You will be asked to progressively fill an underground cave with water. The cave sports a particular topography of rock formations that will affect the way in which the water flows into it and fills it up. After a certain amount of water has flowed in, you will need to determine the water depth at various points.
+
+## Project Structure
+
+```
+hitting-rock-bottom/
+├── src/
+│   ├── typescript/    # TypeScript implementation
+│   ├── python/        # Python implementation
+│   └── ruby/          # Ruby implementation
+├── tests/             # Test files
+├── data/
+│   ├── input/         # Cave input files
+│   └── output/        # Expected output files
+├── docs/              # Additional documentation
+└── README.md
+```
+
+## Running the Solutions
+
+### TypeScript
+```bash
+bun run src/typescript/solve_cave.ts
+```
+
+### Python
+```bash
+python3 src/python/solve_cave.py
+```
+
+### Ruby
+```bash
+ruby src/ruby/water_puzzle.rb
+```
+
+## Puzzle Description
 
 ### The Environment
 

@@ -1,4 +1,5 @@
 from collections import deque
+import os
 
 def parse_input(filename):
     with open(filename) as f:
@@ -53,7 +54,9 @@ def measure_depths(grid):
 
 def main():
     import sys
-    input_file = sys.argv[1] if len(sys.argv) > 1 else 'simple_cave.txt'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    default_input = os.path.join(script_dir, '../../data/input/simple_cave.txt')
+    input_file = sys.argv[1] if len(sys.argv) > 1 else default_input
     grid, water_units = parse_input(input_file)
     filled = fill_cave(grid, water_units)
     depths = measure_depths(filled)

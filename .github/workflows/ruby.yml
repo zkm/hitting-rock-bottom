@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['2.6', '2.7', '3.0']
+        ruby-version: ['3.0', '3.1', '3.2']
 
     steps:
     - uses: actions/checkout@v4
@@ -33,6 +33,15 @@ jobs:
       uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
       with:
         ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Run tests
-      run: bundle exec rake
+    
+    - name: Install dependencies
+      run: gem install rspec
+    
+    - name: Run RSpec tests
+      run: rspec tests/cave_spec.rb --format documentation
+    
+    - name: Run Ruby solver (simple)
+      run: ruby tests/test_simple.rb
+    
+    - name: Run Ruby solver (complex)
+      run: ruby src/ruby/water_puzzle.rb

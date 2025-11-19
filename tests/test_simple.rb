@@ -84,10 +84,12 @@ class Cave
   end
 end
 
-f = File.new('complex_cave.txt')
+script_dir = File.dirname(File.absolute_path(__FILE__))
+input_file = File.join(script_dir, '../data/input/simple_cave.txt')
+f = File.new(input_file)
 lines = f.readlines
 cave = Cave.build(lines[2..lines.size-1])
-2460.times do
+120.times do
   cave.add_water
 end
 
