@@ -1,6 +1,11 @@
 # Hitting Rock Bottom
 
-A water flow simulation puzzle solving hydrography challenges in underground caves.
+[![TypeScript CI](https://github.com/zkm/hitting-rock-bottom/workflows/TypeScript/badge.svg)](https://github.com/zkm/hitting-rock-bottom/actions)
+[![Ruby CI](https://github.com/zkm/hitting-rock-bottom/workflows/Ruby/badge.svg)](https://github.com/zkm/hitting-rock-bottom/actions)
+[![Python CI](https://github.com/zkm/hitting-rock-bottom/workflows/Python/badge.svg)](https://github.com/zkm/hitting-rock-bottom/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A multi-language water flow simulation solving hydrography challenges in underground caves. Implementations in TypeScript, Python, and Ruby demonstrate different approaches to the same algorithmic problem.
 
 _Original puzzle contributed by Gregory Brown & Andrea Singh and published on July 14, 2011 as part of [PuzzleNode #11](http://puzzlenode.com/puzzles/11-hitting-rock-bottom)_
 
@@ -10,38 +15,98 @@ The science of hydrography is about charting bodies of water by measuring their 
 
 In this challenge you will work on a simulation problem with a hydrographic theme. You will be asked to progressively fill an underground cave with water. The cave sports a particular topography of rock formations that will affect the way in which the water flows into it and fills it up. After a certain amount of water has flowed in, you will need to determine the water depth at various points.
 
+## Quick Start
+
+### Prerequisites
+
+- **TypeScript**: [Bun](https://bun.sh/) (latest)
+- **Python**: Python 3.9+ 
+- **Ruby**: Ruby 3.2+
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/zkm/hitting-rock-bottom.git
+cd hitting-rock-bottom
+
+# Install TypeScript dependencies
+bun install
+```
+
+### Running the Solutions
+
+```bash
+# TypeScript (default - simple cave)
+bun run src/typescript/solve_cave.ts
+
+# Python (default - simple cave)
+python src/python/solve_cave.py
+
+# Ruby (complex cave)
+ruby src/ruby/water_puzzle.rb
+
+# With custom input file
+bun run src/typescript/solve_cave.ts data/input/complex_cave.txt
+python src/python/solve_cave.py data/input/complex_cave.txt
+```
+
+### Running Tests
+
+```bash
+# TypeScript (Bun test)
+bun test
+
+# Ruby (RSpec)
+gem install rspec
+rspec tests/cave_spec.rb --format documentation
+
+# Ruby (Minitest)
+ruby tests/test_cave.rb
+
+# Ruby (Simple script)
+ruby tests/test_simple.rb
+```
+
 ## Project Structure
 
 ```
 hitting-rock-bottom/
+├── .github/
+│   └── workflows/       # CI/CD pipelines for all languages
 ├── src/
-│   ├── typescript/    # TypeScript implementation
-│   ├── python/        # Python implementation
-│   └── ruby/          # Ruby implementation
-├── tests/             # Test files
+│   ├── typescript/      # TypeScript implementation (Bun)
+│   ├── python/          # Python implementation
+│   └── ruby/            # Ruby implementation
+├── tests/
+│   ├── solve_cave.test.ts   # TypeScript tests (Bun)
+│   ├── cave_spec.rb         # Ruby tests (RSpec)
+│   ├── test_cave.rb         # Ruby tests (Minitest)
+│   └── test_simple.rb       # Ruby simple test script
 ├── data/
-│   ├── input/         # Cave input files
-│   └── output/        # Expected output files
-├── docs/              # Additional documentation
+│   ├── input/           # Cave input files
+│   │   ├── simple_cave.txt
+│   │   └── complex_cave.txt
+│   └── output/          # Reference output files
+├── docs/                # Additional documentation
+│   └── 11-hitting-rock-bottom.md
+├── LICENSE              # MIT License
 └── README.md
 ```
 
-## Running the Solutions
+## Algorithm Implementations
 
-### TypeScript
-```bash
-bun run src/typescript/solve_cave.ts
-```
+Each language implementation uses a slightly different approach to solving the water flow simulation:
 
-### Python
-```bash
-python3 src/python/solve_cave.py
-```
+- **TypeScript**: BFS-based water expansion with priority given to downward flow
+- **Python**: Bottom-up filling with neighbor detection
+- **Ruby**: Queue-based BFS approach with directional flow logic
 
-### Ruby
-```bash
-ruby src/ruby/water_puzzle.rb
-```
+All implementations correctly handle:
+- Gravity-based water flow
+- Horizontal spreading when blocked
+- Flowing water detection
+- Depth measurement per column
 
 ## Puzzle Description
 
@@ -257,9 +322,26 @@ To illustrate how this would work, we'll just add 45 units of water to the cave:
   1 2 2 4 4 4 4 6 6 6 1 1 1 1 ~ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 ```
 
+## Contributing
 
-### Submitting Your Results
+Contributions are welcome! Feel free to:
 
-The sample files are for helping you check your code before you submit your solution to Puzzlenode. The sample input file is called `simple_cave.txt` and the sample output file is called `simple_output.txt`. 
+- Add implementations in other languages
+- Improve existing algorithms
+- Add more test cases
+- Enhance documentation
 
-The input file you need to solve is called `complex_cave.txt`.
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Original puzzle by Gregory Brown & Andrea Singh
+- Published on [PuzzleNode](http://puzzlenode.com/puzzles/11-hitting-rock-bottom) (July 14, 2011)
+
+## See Also
+
+- [Full puzzle description](docs/11-hitting-rock-bottom.md)
+- [GitHub Actions workflows](.github/workflows/)
+
