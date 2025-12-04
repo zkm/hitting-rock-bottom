@@ -21,9 +21,9 @@
   "homepage": "https://github.com/zkm/hitting-rock-bottom#readme",
   "private": true,
   "devDependencies": {
-    "@types/bun": "latest",
+    "@types/bun": "^1.3.3",
     "@types/node": "^24.10.1",
-    "bun-types": "^1.3.2"
+    "bun-types": "^1.3.3"
   },
   "peerDependencies": {
     "typescript": "^5.9.3"
